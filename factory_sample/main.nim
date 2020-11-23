@@ -5,19 +5,16 @@ type Animal = ref object of RootObj
   name: string
   kind: AnimalKind
 
-method getKind(animal: Animal): string {.base.} = return "ANIMAL"
+method getKind(animal: Animal): string {.base.} = "ANIMAL"
 
 type Dog = ref object of Animal
-method getKind(dog: Dog): string = 
-  return "DOG"
+method getKind(dog: Dog): string = "DOG"
 
 type Cat = ref object of Animal
-method getKind(cat: Cat): string = 
-  return "CAT"
+method getKind(cat: Cat): string = "CAT"
 
 type Bird = ref object of Animal
-method getKind(bird: Bird): string = 
-  return "BIRD"
+method getKind(bird: Bird): string = "BIRD"
 
 type AnimalFactory = object
 proc create*(factory: AnimalFactory, kind: AnimalKind): Animal = 
