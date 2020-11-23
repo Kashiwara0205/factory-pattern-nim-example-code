@@ -1,41 +1,41 @@
-type AnimalName {.pure.} = enum
- DOG, CAT, BIRD
+type AnimalKind {.pure.} = enum
+  DOG, CAT, BIRD
 
 type Animal = ref object of RootObj
   name: string
-  kind: string
+  kind: AnimalKind
 
-method getKind(animal: Animal): string {.base.} = return animal.kind
+method getKind(animal: Animal): string {.base.} = return "ANIMAL"
 
 type Dog = ref object of Animal
 method getKind(dog: Dog): string = 
   echo "[ dog.getKind ]"
-  return dog.kind
+  return "DOG"
 
 type Cat = ref object of Animal
 method getKind(cat: Cat): string = 
   echo "[ cat.getKind ]"
-  return cat.kind
+  return "CAT"
 
 type Bird = ref object of Animal
 method getKind(bird: Bird): string = 
   echo "[ bird.getKind ]"
-  return bird.kind
+  return "BIRD"
 
 type AnimalFactory = object
-proc create*(factory: AnimalFactory, kind: AnimalName): Animal = 
+proc create*(factory: AnimalFactory, kind: AnimalKind): Animal = 
   case kind
-    of AnimalName.DOG: return Dog(name: "xxx", kind: "dog")
-    of AnimalName.CAT: return Cat(name: "ooo", kind: "cat")
-    of AnimalName.BIRD: return Bird(name: "iii", kind: "bird")
+    of AnimalKind.DOG: return Dog(name: "xxx", kind: kind)
+    of AnimalKind.CAT: return Cat(name: "ooo", kind: kind)
+    of AnimalKind.BIRD: return Bird(name: "iii", kind: kind)
 
 let factory = AnimalFactory()
 
-let dog = factory.create(AnimalName.DOG)
+let dog = factory.create(AnimalKind.DOG)
 echo dog.getKind()
 
-let cat = factory.create(AnimalName.CAT)
+let cat = factory.create(AnimalKind.CAT)
 echo cat.getKind()
 
-let bird = factory.create(AnimalName.BIRD)
+let bird = factory.create(AnimalKind.BIRD)
 echo bird.getKind()
