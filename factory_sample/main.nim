@@ -1,3 +1,6 @@
+type AnimalName {.pure.} = enum
+ DOG, CAT, BIRD
+
 type Animal = ref object of RootObj
   name: string
   kind: string
@@ -20,20 +23,19 @@ method getKind(bird: Bird): string =
   return bird.kind
 
 type AnimalFactory = object
-proc createAnimal*(factory: AnimalFactory, kind: string): Animal = 
+proc create*(factory: AnimalFactory, kind: AnimalName): Animal = 
   case kind
-    of "dog": return Dog(name: "xxx", kind: "dog")
-    of "cat": return Cat(name: "ooo", kind: "cat")
-    of "bird": return Bird(name: "iii", kind: "bird")
-    else: discard
+    of AnimalName.DOG: return Dog(name: "xxx", kind: "dog")
+    of AnimalName.CAT: return Cat(name: "ooo", kind: "cat")
+    of AnimalName.BIRD: return Bird(name: "iii", kind: "bird")
 
 let factory = AnimalFactory()
 
-let dog = createAnimal(factory, "dog")
+let dog = factory.create(AnimalName.DOG)
 echo dog.getKind()
 
-let cat = createAnimal(factory, "cat")
+let cat = factory.create(AnimalName.CAT)
 echo cat.getKind()
 
-let bird = createAnimal(factory, "bird")
+let bird = factory.create(AnimalName.BIRD)
 echo bird.getKind()
