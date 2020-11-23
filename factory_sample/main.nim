@@ -17,7 +17,7 @@ type Bird = ref object of Animal
 method getKind(bird: Bird): string = "BIRD"
 
 type AnimalFactory = object
-proc create*(factory: AnimalFactory, kind: AnimalKind): Animal = 
+func create*(factory: AnimalFactory, kind: AnimalKind): Animal = 
   case kind
     of AnimalKind.DOG: return Dog(name: "xxx", kind: kind)
     of AnimalKind.CAT: return Cat(name: "ooo", kind: kind)
