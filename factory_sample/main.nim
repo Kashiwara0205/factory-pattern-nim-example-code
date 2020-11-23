@@ -9,17 +9,14 @@ method getKind(animal: Animal): string {.base.} = return "ANIMAL"
 
 type Dog = ref object of Animal
 method getKind(dog: Dog): string = 
-  echo "[ dog.getKind ]"
   return "DOG"
 
 type Cat = ref object of Animal
 method getKind(cat: Cat): string = 
-  echo "[ cat.getKind ]"
   return "CAT"
 
 type Bird = ref object of Animal
 method getKind(bird: Bird): string = 
-  echo "[ bird.getKind ]"
   return "BIRD"
 
 type AnimalFactory = object
